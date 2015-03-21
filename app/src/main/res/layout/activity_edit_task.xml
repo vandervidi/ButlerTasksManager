@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ff2a6a64">
+
+    <EditText
+        android:id="@+id/taskTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Task title"
+        android:inputType="textPersonName"
+        android:autoText="false"
+        android:textColor="#ffffff"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/updateBt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="40dp"
+        android:gravity="center|fill"
+        android:padding="10dp"
+        android:text="Update" />
+
+    <EditText
+        android:id="@+id/taskDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/taskTitle"
+        android:ems="10"
+        android:hint="description"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/chooseHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/chooseDate"
+        android:layout_alignRight="@+id/chooseDate"
+        android:layout_centerVertical="true"
+        android:onClick="setHour"
+        android:text="set hour" />
+
+    <TextView
+        android:id="@+id/pickedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chooseDate"
+        android:layout_centerHorizontal="true"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:textSize="40dp" />
+
+    <Button
+        android:id="@+id/chooseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/taskDescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:onClick="setDate"
+        android:text="pick date" />
+
+    <TextView
+        android:id="@+id/pickedTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/chooseHour"
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp" />
+
+</RelativeLayout>

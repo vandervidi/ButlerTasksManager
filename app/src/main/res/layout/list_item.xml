@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="3dp">
+
+
+
+
+        <RelativeLayout
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="2015"
+                android:id="@+id/yearTextView"
+                android:layout_below="@+id/dayTextView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="#46b1a7"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="19"
+                android:id="@+id/dayTextView"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/yearTextView"
+                android:layout_alignStart="@+id/yearTextView"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"
+                android:textColor="#46b1a7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="06"
+                android:id="@+id/monthTextView"
+                android:layout_alignParentTop="true"
+                android:layout_alignRight="@+id/yearTextView"
+                android:layout_alignEnd="@+id/yearTextView"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"
+                android:textColor="#46b1a7" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="257dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:layout_marginLeft="5dp">
+
+            <TextView
+                android:layout_width="296dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/largeTitle"
+                android:layout_marginTop="2dp"
+                android:textColor="#c7e7e4" />
+
+            <TextView
+                android:id="@+id/smallDescription"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:maxWidth="170dp"
+                android:autoText="false"
+                android:layout_alignBottom="@+id/smallDescription"
+                android:layout_alignLeft="@+id/largeTitle"
+                android:layout_alignStart="@+id/largeTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="6dp"
+                android:textColor="#b5dfdb" />
+
+        </LinearLayout>
+    </FrameLayout>
+

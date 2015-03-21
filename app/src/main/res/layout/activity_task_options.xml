@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:weightSum="1"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:measureWithLargestChild="false"
+        android:longClickable="false"
+        android:focusable="false"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#ff43b1a6">
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/imageButtonDone"
+            android:layout_weight="0.15"
+            android:src="@drawable/done"
+            android:background="@drawable/roundcorner"
+            android:layout_marginRight="8dp"
+            android:clickable="true" />
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/imageButtonEdit"
+            android:layout_weight="0.15"
+            android:layout_gravity="center"
+            android:src="@drawable/edit"
+            android:background="@drawable/roundcorner"
+            android:layout_marginRight="8dp"
+            android:clickable="true" />
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/imageButtonLocation"
+            android:layout_weight="0.15"
+            android:layout_gravity="center"
+            android:src="@drawable/location"
+            android:background="@drawable/roundcorner"
+            android:baselineAlignBottom="false"
+            android:layout_marginRight="8dp"
+            android:clickable="true" />
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/imageButtonDelete"
+            android:layout_weight="0.15"
+            android:layout_gravity="center"
+            android:src="@drawable/delete"
+            android:background="@drawable/roundcorner"
+            android:clickable="true"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:focusable="false" />
+    </LinearLayout>
+</RelativeLayout>
