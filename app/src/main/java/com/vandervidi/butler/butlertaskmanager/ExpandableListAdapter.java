@@ -59,7 +59,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 	    display_title.setText(childTask.getTitle());
 	    display_description.setText(childTask.getDescription());
         display_dateDay.setText(""+childTask.getTaskDate().get(Calendar.DAY_OF_MONTH));
-        display_dateMonth.setText(""+childTask.getTaskDate().get(Calendar.MONTH));
+        display_dateMonth.setText(""+(childTask.getTaskDate().get(Calendar.MONTH)+1));
         display_dateYear.setText(""+childTask.getTaskDate().get(Calendar.YEAR));
         return convertView;
     }
