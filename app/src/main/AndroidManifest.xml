@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vandervidi.butler.butlertaskmanager"
+    android:installLocation="preferExternal"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -10,11 +11,11 @@
 
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
+        android:maxSdkVersion="21" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
+        android:maxSdkVersion="21" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
@@ -34,9 +35,12 @@
         </activity>
         <activity android:name=".AddNewTask" />
         <activity android:name=".EditActivity" />
+        <activity android:name=".NotificationActivity" />
         <activity
             android:name=".TaskOptions"
             android:theme="@style/Transparent" />
+        <service android:name=".service.ScheduleService" />
+        <service android:name=".service.NotifyService" />
 
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -44,6 +48,7 @@
         <!-- Google Analytics Version v4 needs this value for easy tracking -->
         <meta-data android:name="com.google.android.gms.analytics.globalConfigResource"
             android:resource="@xml/global_tracker" />
+
     </application>
 
 </manifest>

@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import com.vandervidi.butler.butlertaskmanager.service.ScheduleClient;
+import com.vandervidi.butler.butlertaskmanager.service.AlarmTask;
 
 import java.util.Calendar;
 
@@ -21,6 +23,9 @@ public class AddNewTask extends Activity {
 	String date;
 	String time;
 
+
+    Calendar alertTime = Calendar.getInstance();
+    private ScheduleClient scheduleClient;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,9 @@ public class AddNewTask extends Activity {
 		// Setting references to view components.
 
 		Button btAddNewTask = (Button) findViewById(R.id.addToDB);
-		
+
+        scheduleClient = new ScheduleClient(this);
+        scheduleClient.bindService();
 
 		// Open DB connection.
 		openDB();
@@ -47,6 +54,10 @@ public class AddNewTask extends Activity {
 				String s_taskTitle = twTitle.getText().toString();
 				String s_taskDescription = twDescription.getText().toString();
 				mydb.insertRow(s_taskTitle, s_taskDescription,date,time);
+                System.out.println(alertTime);
+                scheduleClient.setNotification(alertTime);
+
+
 				finish();
 				Intent intent = new Intent(AddNewTask.this, MainActivity.class);
 				startActivity(intent);
@@ -66,8 +77,9 @@ public class AddNewTask extends Activity {
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 			// TODO Auto-generated method stub
-			
-			date = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
+
+            alertTime.set(year,monthOfYear,dayOfMonth); // setting date to alertTime
+            date = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
 			TextView dateView = (TextView)findViewById(R.id.pickedDate);
 			dateView.setText(date);
 
@@ -93,6 +105,10 @@ public class AddNewTask extends Activity {
 			}
 			TextView timeView = (TextView)findViewById(R.id.pickedTime);
 			timeView.setText(time);
+
+            alertTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            alertTime.set(Calendar.MINUTE, minute);
+            alertTime.set(Calendar.SECOND, 0);
 		}
 	};
 		
