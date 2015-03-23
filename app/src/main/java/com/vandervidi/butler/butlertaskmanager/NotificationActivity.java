@@ -14,4 +14,4 @@ import android.os.Bundle;
         }
 
 }
-//wtf is this activity for?
+

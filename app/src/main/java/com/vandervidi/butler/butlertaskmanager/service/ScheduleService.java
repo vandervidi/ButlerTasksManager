@@ -1,11 +1,12 @@
 package com.vandervidi.butler.butlertaskmanager.service;
 
-import java.util.Calendar;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+
+import java.util.Calendar;
 
 public class ScheduleService extends Service{
 	private final IBinder mBinder = new ServiceBinder();
@@ -27,10 +28,10 @@ public class ScheduleService extends Service{
 		return mBinder;
 	}
 	
-	public void setAlarm(Calendar myCal){
+	public void setAlarm(Calendar myCal, String s_taskTitle){
 	
-		System.out.println("mycal SetAlarm");
-		new AlarmTask(this,myCal).run();
+		//System.out.println("mycal SetAlarm");
+		new AlarmTask(this,myCal, s_taskTitle).run();
 	}
 	
 

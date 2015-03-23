@@ -13,8 +13,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
 import com.vandervidi.butler.butlertaskmanager.service.ScheduleClient;
-import com.vandervidi.butler.butlertaskmanager.service.AlarmTask;
 
 import java.util.Calendar;
 
@@ -22,8 +22,6 @@ public class AddNewTask extends Activity {
 	DBAdapter mydb;
 	String date;
 	String time;
-
-
     Calendar alertTime = Calendar.getInstance();
     private ScheduleClient scheduleClient;
 
@@ -55,7 +53,7 @@ public class AddNewTask extends Activity {
 				String s_taskDescription = twDescription.getText().toString();
 				mydb.insertRow(s_taskTitle, s_taskDescription,date,time);
                 System.out.println(alertTime);
-                scheduleClient.setNotification(alertTime);
+                scheduleClient.setNotification(alertTime, s_taskTitle);
 
 
 				finish();

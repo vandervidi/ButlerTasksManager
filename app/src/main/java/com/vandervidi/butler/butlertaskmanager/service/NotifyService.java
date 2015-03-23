@@ -1,7 +1,5 @@
 package com.vandervidi.butler.butlertaskmanager.service;
 
-import  com.vandervidi.butler.butlertaskmanager.NotificationActivity;
-
 import android.R;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -12,11 +10,13 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.vandervidi.butler.butlertaskmanager.NotificationActivity;
+
 public class NotifyService extends Service{
 
 	int mId;
 	private static final int NOTIFICATION=0;
-	public static final String INTENT_NOTIFY = "com.example.shmulik8.service.INTENT_NOTIFY";
+	public static final String INTENT_NOTIFY = "com.vandervidi.butler.butlertaskmanager.service.INTENT_NOTIFY";
 	private NotificationManager mNM;
 	private final IBinder mBinder = new ServiceBinder();
 	
@@ -36,9 +36,10 @@ public class NotifyService extends Service{
         Log.i("LocalService", "Received start id " + startId + ": " + intent);
          
         // If this service was started by out AlarmTask intent then we want to show our notification
-        if(intent.getBooleanExtra(INTENT_NOTIFY, false))
-            showNotification();
-         
+        if(intent.getBooleanExtra(INTENT_NOTIFY, false)) {
+           String testString =  intent.getStringExtra("someText");
+            showNotification(testString);
+        }
         // We don't care if this service is stopped as we have already delivered our notification
         return START_NOT_STICKY;
     }
@@ -48,13 +49,13 @@ public class NotifyService extends Service{
         return mBinder;
     }
 	
-	 private void showNotification() {
+	 private void showNotification(String taskTitle) {
 	        // This is the 'title' of the notification
-	        CharSequence title = "Alarm!!";
+	        CharSequence title = "myButler : Task reminder";
 	        // This is the icon to use on the notification
-	        int icon = R.drawable.ic_dialog_alert;
+	        int icon = R.drawable.ic_dialog_info;
 	        // This is the scrolling text of the notification
-	        CharSequence text = "Gal alarm.";       
+	        CharSequence text = taskTitle;
 	        // What time to show on the notification
 	        long time = System.currentTimeMillis();
 	         

@@ -1,12 +1,12 @@
 package com.vandervidi.butler.butlertaskmanager.service;
 
-import java.util.Calendar;
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+
+import java.util.Calendar;
 
 
 public class ScheduleClient {
@@ -40,10 +40,10 @@ public class ScheduleClient {
 		}
 	};
 	
-	  public void setNotification(Calendar myCal){
+	  public void setNotification(Calendar myCal, String s_taskTitle){
 		  //creating an alarm 
 		 
-		  mBoundService.setAlarm(myCal);
+		  mBoundService.setAlarm(myCal, s_taskTitle);
 	  }
 	  public void unBindService(){
 		  if(mIsBound){
