@@ -16,7 +16,7 @@ public class NotifyService extends Service{
 
 	int mId;
 	private static final int NOTIFICATION=0;
-	public static final String INTENT_NOTIFY = "com.example.shmulik8.service.INTENT_NOTIFY";
+	public static final String INTENT_NOTIFY = "com.vandervidi.butler.butlertaskmanager.service.INTENT_NOTIFY";
 	private NotificationManager mNM;
 	private final IBinder mBinder = new ServiceBinder();
 	
