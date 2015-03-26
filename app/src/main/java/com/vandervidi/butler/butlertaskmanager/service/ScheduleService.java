@@ -29,8 +29,7 @@ public class ScheduleService extends Service{
 	}
 	
 	public void setAlarm(Calendar myCal, String s_taskTitle){
-	
-		//System.out.println("mycal SetAlarm");
+
 		new AlarmTask(this,myCal, s_taskTitle).run();
 	}
 	

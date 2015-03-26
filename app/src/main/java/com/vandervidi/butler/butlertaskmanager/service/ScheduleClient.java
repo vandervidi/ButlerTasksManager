@@ -34,7 +34,7 @@ public class ScheduleClient {
 		
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
-			// when we have connetion with the service
+			// when we have connection with the service
 			mBoundService = ((ScheduleService.ServiceBinder)service).getService();
 			
 		}

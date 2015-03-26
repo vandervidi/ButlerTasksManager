@@ -1,9 +1,9 @@
 package com.vandervidi.butler.butlertaskmanager;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 //import android.widget.ExpandableListAdapter;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
 	ExpandableListAdapter listAdapter;
 	ExpandableListView expListView;

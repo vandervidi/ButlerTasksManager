@@ -7,13 +7,16 @@
 
     <EditText
         android:id="@+id/taskTitle"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Task title"
         android:inputType="textPersonName"
         android:textColor="#ffffff"
-        android:textColorHint="#ffffff" />
+        android:textColorHint="#ffffff"
+        android:layout_above="@+id/taskDescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="37dp" />
 
     <Button
         android:id="@+id/addToDB"
@@ -22,51 +25,58 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="40dp"
-        android:gravity="center|fill"
+        android:gravity="center|center_vertical|center_horizontal|fill"
+        android:textAlignment="gravity"
         android:padding="10dp"
         android:text="Add" />
 
     <EditText
         android:id="@+id/taskDescription"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/taskTitle"
         android:ems="10"
         android:hint="description"
         android:inputType="textPersonName"
         android:textColor="#ffffff"
-        android:textColorHint="#ffffff" />
+        android:textColorHint="#ffffff"
+        android:layout_above="@+id/chooseDate"
+        android:layout_alignLeft="@+id/taskTitle"
+        android:layout_alignStart="@+id/taskTitle"
+        android:layout_marginBottom="27dp" />
 
     <Button
         android:id="@+id/chooseHour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/chooseDate"
-        android:layout_alignRight="@+id/chooseDate"
-        android:layout_centerVertical="true"
         android:onClick="setHour"
-        android:text="set hour" />
+        android:text="set hour"
+        android:layout_below="@+id/pickedDate"
+        android:layout_toLeftOf="@+id/pickedDate"
+        android:layout_toStartOf="@+id/pickedDate"
+        android:layout_marginTop="50dp" />
 
     <TextView
         android:id="@+id/pickedDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/chooseDate"
-        android:layout_centerHorizontal="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:textSize="40dp" />
+        android:text="date"
+        android:textSize="30dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/chooseDate"
+        android:layout_toEndOf="@+id/chooseDate"
+        android:layout_marginStart="64dp" />
 
     <Button
         android:id="@+id/chooseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/taskDescription"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
         android:onClick="setDate"
-        android:text="pick date" />
+        android:text="pick date"
+        android:layout_above="@+id/chooseHour"
+        android:layout_alignLeft="@+id/taskDescription"
+        android:layout_alignStart="@+id/taskDescription" />
 
     <TextView
         android:id="@+id/pickedTime"
@@ -74,8 +84,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:textSize="40sp"
-        android:layout_below="@+id/chooseHour"
-        android:layout_centerHorizontal="true" />
+        android:text="time"
+        android:textSize="30dp"
+        android:layout_alignBottom="@+id/chooseHour"
+        android:layout_alignLeft="@+id/pickedDate"
+        android:layout_alignStart="@+id/pickedDate" />
 
 </RelativeLayout>

@@ -1,12 +1,12 @@
 package com.vandervidi.butler.butlertaskmanager;
 
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +18,7 @@ import com.vandervidi.butler.butlertaskmanager.service.ScheduleClient;
 
 import java.util.Calendar;
 
-public class AddNewTask extends Activity {
+public class AddNewTask extends ActionBarActivity {
 	DBAdapter mydb;
 	String date;
 	String time;
