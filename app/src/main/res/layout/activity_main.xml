@@ -20,8 +20,8 @@
          android:layout_below="@+id/addTaskbt" />
 
     <ImageButton
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/imageButtonAdd"
         android:layout_gravity="right|bottom"
         android:background="@drawable/fabbutton"/>

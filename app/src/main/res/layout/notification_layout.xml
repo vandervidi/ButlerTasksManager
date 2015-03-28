@@ -3,50 +3,44 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:weightSum="1">
 
-    <TextView
-        android:layout_width="394dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="To do:"
-        android:id="@+id/toDo" />
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text="taskTitle"
         android:id="@+id/taskTitle"
-        android:layout_weight="0.04" />
+        android:layout_weight="0.04"
+        android:textSize="35sp"
+        android:gravity="center"
+        android:padding="15px" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="More info:"
-        android:id="@+id/moreInfo" />
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/taskDescription" />
+        android:text="taskDiscription"
+        android:id="@+id/taskDescription"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:padding="15px" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="When?"
-        android:id="@+id/When" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Time and date"
-        android:id="@+id/taskDate" />
+        android:id="@+id/taskDate"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:padding="15dp" />
 
     <LinearLayout
         android:id="@+id/navigationWrapper"
@@ -54,28 +48,26 @@
         android:layout_width="fill_parent"
         android:layout_height="359dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Where?"
-            android:id="@+id/where" />
+
 
         <fragment
             android:id="@+id/map"
             android:layout_width="match_parent"
-            android:layout_height="238dp"
+            android:layout_height="match_parent"
             class="com.google.android.gms.maps.MapFragment"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_above="@+id/bt_setLocation"
             android:layout_below="@+id/autoCompleteLocation" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Waze it!"
-            android:id="@+id/NavigateWithWaze" />
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Waze it!"
+        android:id="@+id/NavigateWithWaze"
+        android:background="#1976D2"
+        android:textColor="#ffffff" />
 
 </LinearLayout>
