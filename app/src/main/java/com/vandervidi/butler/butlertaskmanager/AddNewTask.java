@@ -85,7 +85,7 @@ public class AddNewTask extends ActionBarActivity {
                 String s_datePicked[] = (dateView.getText().toString()).split("/");
                 String s_timePicked[] = (timeView.getText().toString()).split(":");
                 if(s_taskTitle.equals("") || s_taskDescription.equals("") || s_datePicked.length==1 || s_timePicked.length==1) {
-                    Toast.makeText(getApplicationContext(), "You must enter Title, Date and Time", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "You must enter Title, description ,Date and Time", Toast.LENGTH_LONG).show();
 
                 }else {
                     if (latLngSerial != null) {

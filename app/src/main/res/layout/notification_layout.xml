@@ -1,73 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:weightSum="1">
-
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="taskTitle"
-        android:id="@+id/taskTitle"
-        android:layout_weight="0.04"
-        android:textSize="35sp"
-        android:gravity="center"
-        android:padding="15px" />
-
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="taskDiscription"
-        android:id="@+id/taskDescription"
-        android:textSize="25sp"
-        android:gravity="center"
-        android:padding="15px" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Time and date"
-        android:id="@+id/taskDate"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:padding="15dp" />
+    android:weightSum="1"
+    android:scrollbars="vertical">
 
     <LinearLayout
-        android:id="@+id/navigationWrapper"
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="359dp">
-
-
-
-        <fragment
-            android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.google.android.gms.maps.MapFragment"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_above="@+id/bt_setLocation"
-            android:layout_below="@+id/autoCompleteLocation" />
-
-    </LinearLayout>
-
-    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Waze it!"
-        android:id="@+id/NavigateWithWaze"
-        android:background="#1976D2"
-        android:textColor="#ffffff" />
+        android:orientation="vertical" >
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="taskTitle"
+            android:id="@+id/taskTitle"
+            android:layout_weight="0.04"
+            android:textSize="27sp"
+            android:gravity="center"
+            android:padding="15px"
+            android:textIsSelectable="true" />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="taskDiscription"
+            android:id="@+id/taskDescription"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="15px"
+            android:textIsSelectable="false" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Time and date"
+            android:id="@+id/taskDate"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:textIsSelectable="true" />
+
+        <LinearLayout
+            android:id="@+id/navigationWrapper"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="359dp">
+
+
+            <fragment
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="316dp"
+                class="com.google.android.gms.maps.MapFragment"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_above="@+id/bt_setLocation"
+                android:layout_below="@+id/autoCompleteLocation" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Waze it!"
+                android:id="@+id/NavigateWithWaze"
+                android:background="#1976D2"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
