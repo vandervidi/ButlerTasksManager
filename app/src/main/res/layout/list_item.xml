@@ -22,7 +22,7 @@
                 android:layout_below="@+id/dayTextView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textColor="#ff000000"
+                android:textColor="#757575"
                 android:textStyle="bold" />
 
             <TextView
@@ -36,7 +36,7 @@
                 android:layout_alignStart="@+id/yearTextView"
                 android:layout_marginTop="4dp"
                 android:textStyle="bold"
-                android:textColor="#ff000000" />
+                android:textColor="#757575" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
                 android:layout_alignEnd="@+id/yearTextView"
                 android:layout_marginTop="4dp"
                 android:textStyle="bold"
-                android:textColor="#ff000000" />
+                android:textColor="#757575" />
 
         </RelativeLayout>
 
@@ -67,7 +67,7 @@
                 android:text="Large Text"
                 android:id="@+id/largeTitle"
                 android:layout_marginTop="2dp"
-                android:textColor="#ff000000" />
+                android:textColor="#757575" />
 
             <TextView
                 android:id="@+id/smallDescription"
@@ -83,7 +83,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="6dp"
-                android:textColor="#ff000000" />
+                android:textColor="#757575" />
 
         </LinearLayout>
     </FrameLayout>
