@@ -40,10 +40,10 @@ public class AddNewTask extends ActionBarActivity {
 		// Setting references to view components.
         final TextView twDescription = (TextView) findViewById(R.id.taskDescription);
         final TextView twTitle = (TextView) findViewById(R.id.taskTitle);
-        final TextView dateView = (TextView)findViewById(R.id.pickedDate);
-        final TextView timeView = (TextView)findViewById(R.id.pickedTime);
-        final Button setLocation = (Button) findViewById(R.id.setLocation);
-        final Button btAddNewTask = (Button) findViewById(R.id.addToDB);
+        final Button dateView = (Button)findViewById(R.id.chooseDate);
+            final Button timeView = (Button)findViewById(R.id.chooseHour);
+            final Button setLocation = (Button) findViewById(R.id.setLocation);
+            final Button btAddNewTask = (Button) findViewById(R.id.addToDB);
         final Button bt_map = (Button) findViewById(R.id.goToMap);
 
         // Set location button click listener
@@ -127,8 +127,13 @@ public class AddNewTask extends ActionBarActivity {
 
             alertTime.set(year,monthOfYear,dayOfMonth); // setting date to alertTime
             date = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
-			TextView dateView = (TextView)findViewById(R.id.pickedDate);
-			dateView.setText(date);
+
+			/*TextView dateView = (TextView)findViewById(R.id.pickedDate);
+			dateView.setText(date);*/
+
+            Button b1 = (Button)findViewById(R.id.chooseDate);
+            b1.setText(date);
+
 		}
 	};
 	
@@ -143,8 +148,10 @@ public class AddNewTask extends ActionBarActivity {
 			}else{
 				time=hourOfDay+":"+minute;
 			}
-			TextView timeView = (TextView)findViewById(R.id.pickedTime);
-			timeView.setText(time);
+			/*TextView timeView = (TextView)findViewById(R.id.pickedTime);
+			timeView.setText(time);*/
+            Button b1 = (Button)findViewById(R.id.chooseHour);
+            b1.setText(time);
 
             alertTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             alertTime.set(Calendar.MINUTE, minute);
