@@ -78,7 +78,7 @@ public class Map extends Activity implements OnMapReadyCallback {
                 selectedLocation = getLocationFromAddress(chosenAddress);
                 currSelectedLat = selectedLocation.latitude;
                 currSelectedLng = selectedLocation.longitude;
-                Toast.makeText(getApplicationContext(), "Lat =  " +selectedLocation.latitude+ "  Lan = "+ selectedLocation.longitude, Toast.LENGTH_SHORT).show();
+
                 googleMap.clear();
                 // create marker
                 MarkerOptions marker = new MarkerOptions().position(selectedLocation).title(i.getStringExtra("taskTitle"));

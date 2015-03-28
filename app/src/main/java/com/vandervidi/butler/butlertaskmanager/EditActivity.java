@@ -92,6 +92,7 @@ public class EditActivity extends Activity {
                 }else {
                     //Update database
                     mydb.updateRow(task.getId(), twTitle.getText().toString(), twDescription.getText().toString(), dateView.getText().toString(), timeView.getText().toString(), latLngSerial.getLat(), latLngSerial.getLng());
+                    Toast.makeText(getApplicationContext(), "Task is updated!)", Toast.LENGTH_LONG).show();
                     //Close this activity and move to main activity
                     Intent intent = new Intent(EditActivity.this, MainActivity.class);
                     startActivity(intent);

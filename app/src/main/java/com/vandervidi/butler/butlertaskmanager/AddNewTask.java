@@ -78,8 +78,11 @@ public class AddNewTask extends ActionBarActivity {
                 }else {
                     if (latLngSerial != null) {
                         mydb.insertRow(s_taskTitle, s_taskDescription, date, time, latLngSerial.getLat(), latLngSerial.getLng());
+                        Toast.makeText(getApplicationContext(), "Created a new task :)", Toast.LENGTH_LONG).show();
+
                     } else {
                         mydb.insertRow(s_taskTitle, s_taskDescription, date, time, 0.0, 0.0);
+                        Toast.makeText(getApplicationContext(), "Created a new task :)", Toast.LENGTH_LONG).show();
                     }
                     scheduleClient.setNotification(alertTime, s_taskTitle);
 

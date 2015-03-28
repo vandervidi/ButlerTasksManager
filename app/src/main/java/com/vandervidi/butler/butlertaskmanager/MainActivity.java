@@ -1,11 +1,7 @@
 package com.vandervidi.butler.butlertaskmanager;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -13,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
@@ -86,7 +81,6 @@ public class MainActivity extends ActionBarActivity {
 		              int groupPosition = ExpandableListView.getPackedPositionGroup(id);
 
 		              //Long click on evry expandable list child
-		              Toast.makeText(getApplicationContext(), "Long Clicked "  , Toast.LENGTH_SHORT).show();
                       //get the longClicked task
 		              switch(groupPosition){
 		               case 0:  task = today.get(childPosition);
@@ -129,8 +123,6 @@ public class MainActivity extends ActionBarActivity {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
             	
             	Task task = null;
-            	//TextView taskTitle = (TextView) v.findViewById(R.id.largeTitle);
-               // Toast.makeText(getApplicationContext(), "Title: " + taskTitle.getText().toString() , Toast.LENGTH_SHORT).show();
                switch(groupPosition){
                case 0:  task = today.get(childPosition);
             	   		break;
@@ -148,9 +140,7 @@ public class MainActivity extends ActionBarActivity {
                        Bundle bundle = new Bundle(); 
                        bundle.putSerializable("taskToPresent",task);
                        intent.putExtras(bundle); 
-                       startActivity(intent); 
-
-
+                       startActivity(intent);
             	return true;
             }
         });
