@@ -78,9 +78,10 @@ public class AddNewTask extends ActionBarActivity {
 
             alertTime.set(year,monthOfYear,dayOfMonth); // setting date to alertTime
             date = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
-			TextView dateView = (TextView)findViewById(R.id.pickedDate);
-			dateView.setText(date);
-
+			/*TextView dateView = (TextView)findViewById(R.id.pickedDate);
+			dateView.setText(date);*/
+            Button b1 = (Button)findViewById(R.id.chooseDate);
+            b1.setText(date);
 			//Testing
 			Log.i("DatePicker", " Day: "+ dayOfMonth);
 			Log.i("DatePicker", " Month: "+ monthOfYear);
@@ -101,8 +102,10 @@ public class AddNewTask extends ActionBarActivity {
 			}else{
 				time=hourOfDay+":"+minute;
 			}
-			TextView timeView = (TextView)findViewById(R.id.pickedTime);
-			timeView.setText(time);
+			/*TextView timeView = (TextView)findViewById(R.id.pickedTime);
+			timeView.setText(time);*/
+            Button b1 = (Button)findViewById(R.id.chooseHour);
+            b1.setText(time);
 
             alertTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             alertTime.set(Calendar.MINUTE, minute);

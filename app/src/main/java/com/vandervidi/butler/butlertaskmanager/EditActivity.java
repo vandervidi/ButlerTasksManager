@@ -36,17 +36,15 @@ public class EditActivity extends Activity {
 		// Setting references to view components and setting its value according to the task recieved
 		final TextView twDescription = (TextView) findViewById(R.id.taskDescription);
 		final TextView twTitle = (TextView) findViewById(R.id.taskTitle);
-		final TextView dateView = (TextView)findViewById(R.id.pickedDate);
-		final TextView timeView = (TextView)findViewById(R.id.pickedTime);
+
 
 		twTitle.setText(task.getTitle());
 		twDescription.setText(task.getDescription());
 		Button btEditTask = (Button) findViewById(R.id.updateBt);
 		Calendar tmpCalendar = task.getTaskDate();
-		dateView.setText(""+tmpCalendar.get(Calendar.DAY_OF_MONTH) + "/"+(tmpCalendar.get(Calendar.MONTH) + 1) + "/" + tmpCalendar.get(Calendar.YEAR));
-		timeView.setText(""+ tmpCalendar.get(Calendar.HOUR_OF_DAY) +":" +tmpCalendar.get(Calendar.MINUTE));
+
 		Log.i("test time",""+tmpCalendar.get(Calendar.HOUR_OF_DAY));
-		//Log.i("task date test", task.getTaskDate().DAY_OF_MONTH + "/" + task.getTaskDate().MONTH + "/" + task.getTaskDate().YEAR);
+
 		// Open DB connection.
 		openDB();
 
@@ -58,7 +56,7 @@ public class EditActivity extends Activity {
 				// TODO Auto-generated method stub
 				String s_taskTitle = twTitle.getText().toString();
 				String s_taskDescription = twDescription.getText().toString();
-				mydb.updateRow(task.getId(), twTitle.getText().toString(), twDescription.getText().toString(), dateView.getText().toString(), timeView.getText().toString());
+				mydb.updateRow(task.getId(), twTitle.getText().toString(), twDescription.getText().toString(), date, time);
 				
 				finish();
 				Intent intent = new Intent(EditActivity.this, MainActivity.class);
@@ -79,9 +77,9 @@ public class EditActivity extends Activity {
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 			// TODO Auto-generated method stub
-			TextView dateView = (TextView)findViewById(R.id.pickedDate);
 			date = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
-			dateView.setText(date);
+            Button b1 = (Button)findViewById(R.id.chooseDate);
+            b1.setText(date);
 
 		}
 	};
@@ -97,8 +95,8 @@ public class EditActivity extends Activity {
 			}else{
 				time=hourOfDay+":"+minute;
 			}
-			TextView timeView = (TextView)findViewById(R.id.pickedTime);
-			timeView.setText(time);
+            Button b1 = (Button)findViewById(R.id.chooseHour);
+            b1.setText(time);
 		}
 	};
 		
