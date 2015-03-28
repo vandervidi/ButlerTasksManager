@@ -1,5 +1,10 @@
 package com.vandervidi.butler.butlertaskmanager;
 
+/**
+ * This Application was developed by: Vidran Abdovich & Gal Shalit
+ * and presented as a final project in Mobile Applications course
+ * in Shenkar college.
+ */
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
