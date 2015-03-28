@@ -17,6 +17,12 @@
     substitute for the full length canonical Activity name in screen view hit. In order to
     specify an alternate screen name use an <screenName> element, with the name attribute
     specifying the canonical name, and the value the alias to use instead. -->
-<screenName name="com.vandervidi.butler.butlertaskmanager.MainActivity">My Main list of tasks Activity</screenName>
+    <string name="com.vandervidi.butler.butlertaskmanager.MainActivity">Main Activity - Tasks list</string>
+    <string name="com.vandervidi.butler.butlertaskmanager.TaskOptions">Transparent task options</string>
+    <string name="com.vandervidi.butler.butlertaskmanager.AddNewTask">Add new task</string>
+    <string name="com.vandervidi.butler.butlertaskmanager.EditActivity">Edit task</string>
+    <string name="com.vandervidi.butler.butlertaskmanager.Map">Set/change task Location</string>
+    <string name="com.vandervidi.butler.butlertaskmanager.NotificationActivityy">Preview task</string>
+    <!--  The following value should be replaced with correct property id. -->
 
     </resources>

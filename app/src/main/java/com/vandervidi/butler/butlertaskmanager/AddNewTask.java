@@ -7,36 +7,56 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.vandervidi.butler.butlertaskmanager.service.ScheduleClient;
 
 import java.util.Calendar;
 
 public class AddNewTask extends ActionBarActivity {
+    private static final String LOG_TAG = "Add New Task Activity";
+    static final int REQUEST_LOCATION = 1;  // Request code for location
+
 	DBAdapter mydb;
-	String date;
-	String time;
+	String date,time;
+	public LatLngPointSerializable latLngSerial = null ;
     Calendar alertTime = Calendar.getInstance();
     private ScheduleClient scheduleClient;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_task);
-		// Setting references to view components.
-
-		Button btAddNewTask = (Button) findViewById(R.id.addToDB);
-
         scheduleClient = new ScheduleClient(this);
         scheduleClient.bindService();
+
+		// Setting references to view components.
+        final TextView twDescription = (TextView) findViewById(R.id.taskDescription);
+        final TextView twTitle = (TextView) findViewById(R.id.taskTitle);
+        final TextView dateView = (TextView)findViewById(R.id.pickedDate);
+        final TextView timeView = (TextView)findViewById(R.id.pickedTime);
+        final Button setLocation = (Button) findViewById(R.id.setLocation);
+        final Button btAddNewTask = (Button) findViewById(R.id.addToDB);
+        final Button bt_map = (Button) findViewById(R.id.goToMap);
+
+        // Set location button click listener
+        bt_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddNewTask.this,Map.class);
+                intent.putExtra("requestCode" , "REQUEST_LOCATION");
+                //Send via intent the
+                startActivityForResult(intent, REQUEST_LOCATION);
+            }
+        });
+
 
 		// Open DB connection.
 		openDB();
@@ -47,24 +67,53 @@ public class AddNewTask extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				TextView twTitle = (TextView) findViewById(R.id.taskTitle);
-				TextView twDescription = (TextView) findViewById(R.id.taskDescription);
+
 				String s_taskTitle = twTitle.getText().toString();
 				String s_taskDescription = twDescription.getText().toString();
-				mydb.insertRow(s_taskTitle, s_taskDescription,date,time);
-                System.out.println(alertTime);
-                scheduleClient.setNotification(alertTime, s_taskTitle);
+                String s_datePicked[] = (dateView.getText().toString()).split("/");
+                String s_timePicked[] = (timeView.getText().toString()).split(":");
+                if(s_taskTitle.equals("") || s_taskDescription.equals("") || s_datePicked.length==1 || s_timePicked.length==1) {
+                    Toast.makeText(getApplicationContext(), "You must enter Title, Date and Time", Toast.LENGTH_LONG).show();
 
+                }else {
+                    if (latLngSerial != null) {
+                        mydb.insertRow(s_taskTitle, s_taskDescription, date, time, latLngSerial.getLat(), latLngSerial.getLng());
+                    } else {
+                        mydb.insertRow(s_taskTitle, s_taskDescription, date, time, 0.0, 0.0);
+                    }
+                    scheduleClient.setNotification(alertTime, s_taskTitle);
 
-				finish();
-				Intent intent = new Intent(AddNewTask.this, MainActivity.class);
-				startActivity(intent);
+                    Intent intent = new Intent(AddNewTask.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
 			}
 		});
 
 	}
 
-	private void openDB() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == REQUEST_LOCATION) {
+            if(resultCode == RESULT_OK){
+                latLngSerial  = (LatLngPointSerializable) data.getSerializableExtra("latlng");
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
+
+
+
+    private void openDB() {
 		mydb = new DBAdapter(this);
 		mydb.open();
 	}
@@ -80,13 +129,6 @@ public class AddNewTask extends ActionBarActivity {
             date = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
 			TextView dateView = (TextView)findViewById(R.id.pickedDate);
 			dateView.setText(date);
-
-			//Testing
-			Log.i("DatePicker", " Day: "+ dayOfMonth);
-			Log.i("DatePicker", " Month: "+ monthOfYear);
-			Log.i("DatePicker", " Year: "+ year);
-
-
 		}
 	};
 	
@@ -117,7 +159,7 @@ public class AddNewTask extends ActionBarActivity {
 		if (id == 1)
 			return new DatePickerDialog(this, mDateSetListener, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 		if (id==0)
-			return new TimePickerDialog(this, mTimeSetListener, 1/*hour*/, 1/*minute*/, true);
+			return new TimePickerDialog(this, mTimeSetListener, Calendar.getInstance().get(Calendar.HOUR_OF_DAY),Calendar.getInstance().get(Calendar.MINUTE) , true);
 		return null;
 	}
 

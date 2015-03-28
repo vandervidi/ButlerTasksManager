@@ -2,10 +2,13 @@ package com.vandervidi.butler.butlertaskmanager;
 
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 public class TaskOptions extends Activity {
@@ -23,6 +26,31 @@ public class TaskOptions extends Activity {
        ImageButton imageLocation = (ImageButton) findViewById(R.id.imageButtonLocation);
        ImageButton imageEdit = (ImageButton) findViewById(R.id.imageButtonEdit);
        ImageButton imageDelete = (ImageButton) findViewById(R.id.imageButtonDelete);
+
+        //Edit navigate image button
+        imageLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(task.getLat() != 0.0 && task.getLng()!= 0.0){
+                    try
+                    {
+                        String url = "waze://?ll="+task.getLat()+","+task.getLng()+"&z=10";
+                        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse(url) );
+                        startActivity( intent );
+                    }
+                    catch ( ActivityNotFoundException ex  )
+                    {
+                        Intent intent =
+                                new Intent( Intent.ACTION_VIEW, Uri.parse("market://details?id=com.waze") );
+                        startActivity(intent);
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "You didnt set location for this task", Toast.LENGTH_LONG).show();
+
+                }
+            }
+        });
 
         //Edit image button click event listener
         imageEdit.setOnClickListener(new View.OnClickListener() {

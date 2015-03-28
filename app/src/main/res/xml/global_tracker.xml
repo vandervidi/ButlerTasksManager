@@ -14,8 +14,12 @@
     <bool name="ga_dryRun">false</bool>
 
     <!-- The screen names that will appear in reports -->
-    <string name="com.vandervidi.butler.butlertaskmanager.MainActivity">My Main list of tasks Activity</string>
-
+    <string name="com.vandervidi.butler.butlertaskmanager.MainActivity">Main Activity - Tasks list</string>
+    <string name="com.vandervidi.butler.butlertaskmanager.TaskOptions">Transparent task options</string>
+    <string name="com.vandervidi.butler.butlertaskmanager.AddNewTask">Add new task</string>
+    <string name="com.vandervidi.butler.butlertaskmanager.EditActivity">Edit task</string>
+    <string name="com.vandervidi.butler.butlertaskmanager.Map">Set/change task Location</string>
+    <string name="com.vandervidi.butler.butlertaskmanager.NotificationActivityy">Preview task</string>
     <!--  The following value should be replaced with correct property id. -->
     <string name="ga_trackingId">UA-61028078-1</string>
 </resources>

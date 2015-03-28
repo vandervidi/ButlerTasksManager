@@ -37,8 +37,8 @@ public class NotifyService extends Service{
          
         // If this service was started by out AlarmTask intent then we want to show our notification
         if(intent.getBooleanExtra(INTENT_NOTIFY, false)) {
-           String testString =  intent.getStringExtra("someText");
-            showNotification(testString);
+           String taskTitle =  intent.getStringExtra("taskTitle");
+            showNotification(taskTitle);
         }
         // We don't care if this service is stopped as we have already delivered our notification
         return START_NOT_STICKY;
@@ -51,7 +51,7 @@ public class NotifyService extends Service{
 
 	 private void showNotification(String taskTitle) {
 	        // This is the 'title' of the notification
-	        CharSequence title = "myButler : Task reminder";
+	        CharSequence title = "Butler : Task reminder";
 	        // This is the icon to use on the notification
 	        int icon = R.drawable.ic_dialog_info;
 	        // This is the scrolling text of the notification

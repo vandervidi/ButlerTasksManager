@@ -90,4 +90,13 @@
         android:layout_alignLeft="@+id/pickedDate"
         android:layout_alignStart="@+id/pickedDate" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Location"
+        android:id="@+id/goToMap"
+        android:layout_above="@+id/addToDB"
+        android:layout_alignLeft="@+id/chooseDate"
+        android:layout_alignStart="@+id/chooseDate" />
+
 </RelativeLayout>

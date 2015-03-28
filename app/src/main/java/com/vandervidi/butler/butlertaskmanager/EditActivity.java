@@ -7,22 +7,24 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class EditActivity extends Activity {
+    private static final String LOG_TAG = "Edit New Task Activity";
+    static final int REQUEST_LOCATION_UPDATE = 2;  // Request code for location
 	DBAdapter mydb;
-
 	//static final int dialog_id = 1;
-	String date;
-	String time;
-
+	private String date;
+	private String time;
+    private Task task;
+    private LatLngPointSerializable latLngSerial;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +33,46 @@ public class EditActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_task);
 		//Save task instance from an intent
-		final Task task = (Task)getIntent().getSerializableExtra("taskToEdit"); 
-		
+		task = (Task)getIntent().getSerializableExtra("taskToEdit");
+
+        //Save current task location cords
+        latLngSerial = new LatLngPointSerializable(task.getLat(), task.getLng());
+
 		// Setting references to view components and setting its value according to the task recieved
 		final TextView twDescription = (TextView) findViewById(R.id.taskDescription);
 		final TextView twTitle = (TextView) findViewById(R.id.taskTitle);
 		final TextView dateView = (TextView)findViewById(R.id.pickedDate);
 		final TextView timeView = (TextView)findViewById(R.id.pickedTime);
+        final Button setLocation = (Button) findViewById(R.id.setLocation);
+        final Button btEditTask = (Button) findViewById(R.id.updateBt);
 
 		twTitle.setText(task.getTitle());
 		twDescription.setText(task.getDescription());
-		Button btEditTask = (Button) findViewById(R.id.updateBt);
+
+
 		Calendar tmpCalendar = task.getTaskDate();
 		dateView.setText(""+tmpCalendar.get(Calendar.DAY_OF_MONTH) + "/"+(tmpCalendar.get(Calendar.MONTH) + 1) + "/" + tmpCalendar.get(Calendar.YEAR));
 		timeView.setText(""+ tmpCalendar.get(Calendar.HOUR_OF_DAY) +":" +tmpCalendar.get(Calendar.MINUTE));
-		Log.i("test time",""+tmpCalendar.get(Calendar.HOUR_OF_DAY));
-		//Log.i("task date test", task.getTaskDate().DAY_OF_MONTH + "/" + task.getTaskDate().MONTH + "/" + task.getTaskDate().YEAR);
+
+
 		// Open DB connection.
 		openDB();
+
+        //Set/change location button click listener
+        setLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditActivity.this,Map.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("taskLatLanSerializable",latLngSerial);
+                intent.putExtras(bundle);
+                bundle.putString("requestCode", "REQUEST_LOCATION_UPDATE");
+                bundle.putString("taskTitle", task.getTitle());
+                intent.putExtras(bundle);
+                //Send via intent the
+                startActivityForResult(intent, REQUEST_LOCATION_UPDATE);
+            }
+        });
 
 		// 'Edit task' button onCLickListener
 		btEditTask.setOnClickListener(new View.OnClickListener() {
@@ -56,13 +80,22 @@ public class EditActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+                //Get reference to view components
 				String s_taskTitle = twTitle.getText().toString();
 				String s_taskDescription = twDescription.getText().toString();
-				mydb.updateRow(task.getId(), twTitle.getText().toString(), twDescription.getText().toString(), dateView.getText().toString(), timeView.getText().toString());
-				
-				finish();
-				Intent intent = new Intent(EditActivity.this, MainActivity.class);
-				startActivity(intent);
+                String s_datePicked = dateView.getText().toString();
+                String s_timePicked = timeView.getText().toString();
+                if(s_taskTitle.equals("") || s_taskDescription.equals("") || s_datePicked.equals("") || s_timePicked.equals("")) {
+                    Toast.makeText(getApplicationContext(), "You must enter Title, Date and Time", Toast.LENGTH_LONG).show();
+
+                }else {
+                    //Update database
+                    mydb.updateRow(task.getId(), twTitle.getText().toString(), twDescription.getText().toString(), dateView.getText().toString(), timeView.getText().toString(), latLngSerial.getLat(), latLngSerial.getLng());
+                    //Close this activity and move to main activity
+                    Intent intent = new Intent(EditActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
 			}
 		});
 
@@ -78,7 +111,7 @@ public class EditActivity extends Activity {
 
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-			// TODO Auto-generated method stub
+
 			TextView dateView = (TextView)findViewById(R.id.pickedDate);
 			date = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
 			dateView.setText(date);
@@ -104,14 +137,14 @@ public class EditActivity extends Activity {
 		
 	
 	//dialog callback
-	protected Dialog onCreateDialog(int id) {
+    protected Dialog onCreateDialog(int id) {
 
-		if (id == 1)
-			return new DatePickerDialog(this, mDateSetListener, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-		if (id == 0)
-			return new TimePickerDialog(this, mTimeSetListener, 1/*hour*/, 1/*minute*/, true);
-		return null;
-	}
+        if (id == 1)
+            return new DatePickerDialog(this, mDateSetListener, task.getTaskDate().get(Calendar.YEAR), task.getTaskDate().get(Calendar.MONTH), task.getTaskDate().get(Calendar.DAY_OF_MONTH));
+        if (id==0)
+            return new TimePickerDialog(this, mTimeSetListener, task.getTaskDate().get(Calendar.HOUR_OF_DAY), task.getTaskDate().get(Calendar.MINUTE) , true);
+        return null;
+    }
 
 	
 
@@ -125,4 +158,16 @@ public class EditActivity extends Activity {
 
 	}
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == REQUEST_LOCATION_UPDATE) {
+            if(resultCode == RESULT_OK){
+                latLngSerial  = (LatLngPointSerializable) data.getSerializableExtra("latlng");
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
 }

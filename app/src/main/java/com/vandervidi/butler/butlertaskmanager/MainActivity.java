@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -140,9 +139,9 @@ public class MainActivity extends ActionBarActivity {
                
                //pass the rowIdClicked
                 
-               Intent intent = new Intent(MainActivity.this, EditActivity.class); 
+               Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
                        Bundle bundle = new Bundle(); 
-                       bundle.putSerializable("taskToEdit",task); 
+                       bundle.putSerializable("taskToPresent",task);
                        intent.putExtras(bundle); 
                        startActivity(intent); 
 
@@ -200,15 +199,12 @@ public class MainActivity extends ActionBarActivity {
 
 				Task tmpTask = new Task(cursor.getInt(DBAdapter.COL_ROWID),
 						cursor.getString(DBAdapter.COL_TASKTITLE),
-						cursor.getString(DBAdapter.COL_TASKDESCRIPTION));
+						cursor.getString(DBAdapter.COL_TASKDESCRIPTION),
+                        cursor.getDouble(DBAdapter.COL_LAT),
+                        cursor.getDouble(DBAdapter.COL_LNG));
+
 				tmpTask.setDate(cursor.getString(DBAdapter.COL_DATE),
 						cursor.getString(DBAdapter.COL_TIME));
-				
-				
-				Log.i("TaskMessage","Day of month: "+ tmpTask.getTaskDate().get(Calendar.DAY_OF_MONTH)
-								+ " Month: "
-								+ tmpTask.getTaskDate().get(Calendar.MONTH)
-								+ " Year: " + tmpTask.getTaskDate().get(Calendar.YEAR));
 
 				// check if this is this task due date is today
 				tmpInt = analyzeDate(tmpTask.getTaskDate());

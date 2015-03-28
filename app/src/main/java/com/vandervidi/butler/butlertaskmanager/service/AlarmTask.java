@@ -25,7 +25,7 @@ public class AlarmTask implements Runnable{
 	    @Override
 	    public void run() {
 	    	 Intent intent = new Intent(context, NotifyService.class);
-             intent.putExtra("someText", notificationTasktitle);
+             intent.putExtra("taskTitle", notificationTasktitle);
 	         intent.putExtra(NotifyService.INTENT_NOTIFY, true);
 	         PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
 	        
