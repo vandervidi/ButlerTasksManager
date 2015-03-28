@@ -39,14 +39,9 @@ public class MainActivity extends ActionBarActivity {
 
         /**
          * Google Analytics:
-         * Initialize a tracker for this activity.
          */
         //Get a Tracker (should auto-report)
-
         Tracker t = ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
-        // Enable Advertising Features.
-        t.enableAdvertisingIdCollection(true);
-
 
 		// get 'add new task' view
 		ImageButton b_addNew = (ImageButton) findViewById(R.id.imageButtonAdd);
@@ -59,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 		
-		// get the listview
+		// get the list view
 		expListView = (ExpandableListView) findViewById(R.id.lvExp);
 
 		// preparing list data
@@ -70,6 +65,8 @@ public class MainActivity extends ActionBarActivity {
 
 		// setting list adapter
 		expListView.setAdapter(listAdapter);
+
+        //On long click , start task options activity
 		expListView.setOnItemLongClickListener(new OnItemLongClickListener() {
 		      @Override
 		      public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -104,13 +101,8 @@ public class MainActivity extends ActionBarActivity {
 		              //Long click on a Expandable list main item
 		          } else if(itemType == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
 		             int  groupPosition = ExpandableListView.getPackedPositionGroup(id);
-		              //do your per-group callback here
-		            
-
-		              return true; //true if we consumed the click, false if not
-
+		              return true;
 		          } else {
-		              // null item; we don't consume the click
 		              return false;
 		          }
 		      }
@@ -135,7 +127,6 @@ public class MainActivity extends ActionBarActivity {
                }
                
                //pass the rowIdClicked
-                
                Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
 
                        Bundle bundle = new Bundle(); 
@@ -230,7 +221,8 @@ public class MainActivity extends ActionBarActivity {
 		listDataChild.put(listDataHeader.get(2), later);
 		listDataChild.put(listDataHeader.get(3), missed);
 	}
-	
+
+    //Sort tasks and populate lists
 	private int analyzeDate(Calendar tcal) {
 		Calendar tc = Calendar.getInstance();
 		Calendar c = Calendar.getInstance();

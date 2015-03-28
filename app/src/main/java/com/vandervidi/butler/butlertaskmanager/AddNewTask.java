@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.vandervidi.butler.butlertaskmanager.service.ScheduleClient;
 
 import java.util.Calendar;
@@ -36,6 +37,12 @@ public class AddNewTask extends ActionBarActivity {
 		setContentView(R.layout.activity_add_new_task);
         scheduleClient = new ScheduleClient(this);
         scheduleClient.bindService();
+
+        /**
+        * Google Analytics:
+         */
+        //Get a Tracker (should auto-report)
+         ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
 
 		// Setting references to view components.
         final TextView twDescription = (TextView) findViewById(R.id.taskDescription);
@@ -88,7 +95,7 @@ public class AddNewTask extends ActionBarActivity {
 
                     Intent intent = new Intent(AddNewTask.this, MainActivity.class);
                     startActivity(intent);
-                    //scheduleClient.unBindService();
+                    scheduleClient.unBindService();
                     finish();
                 }
 			}
@@ -103,12 +110,21 @@ public class AddNewTask extends ActionBarActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        //Get an Analytics tracker to report app starts & uncaught exceptions etc.
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    @Override
     protected void onStop() {
         // When our activity is stopped ensure we also stop the connection to the service
         // this stops us leaking our activity into the system *bad*
         if(scheduleClient != null)
             scheduleClient.unBindService();
         super.onStop();
+        //Stop the analytics tracking
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     @Override

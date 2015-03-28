@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+
 import java.util.Calendar;
 
 public class EditActivity extends Activity {
@@ -28,10 +30,16 @@ public class EditActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_task);
+
+        /**
+         * Google Analytics:
+         */
+        //Get a Tracker (should auto-report)
+        ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+
+
 		//Save task instance from an intent
 		task = (Task)getIntent().getSerializableExtra("taskToEdit");
 
@@ -171,5 +179,19 @@ public class EditActivity extends Activity {
                 //Write your code if there's no result
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Get an Analytics tracker to report app starts & uncaught exceptions etc.
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //Stop the analytics tracking
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 }

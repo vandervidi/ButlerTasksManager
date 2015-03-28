@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -29,6 +30,13 @@ public class NotificationActivity extends Activity{
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.notification_layout);
+
+            /**
+             * Google Analytics:
+             */
+            //Get a Tracker (should auto-report)
+            ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+
             //Get view references
             TextView tw_taskTitle = (TextView) findViewById(R.id.taskTitle);
             TextView tw_taskDescription = (TextView) findViewById(R.id.taskDescription);
@@ -91,6 +99,8 @@ public class NotificationActivity extends Activity{
                 });
             }
         }
+
+
         public String getProperMonthStructure(Calendar c){
         int minutes = c.get(Calendar.MINUTE);
             if(minutes<10) {
@@ -98,6 +108,20 @@ public class NotificationActivity extends Activity{
             }
                 else return ""+minutes;
             }
+
+        @Override
+        protected void onStart() {
+            super.onStart();
+            //Get an Analytics tracker to report app starts & uncaught exceptions etc.
+            GoogleAnalytics.getInstance(this).reportActivityStart(this);
+        }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //Stop the analytics tracking
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
+    }
     }
 
 
