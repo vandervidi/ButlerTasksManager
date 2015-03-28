@@ -137,11 +137,12 @@ public class MainActivity extends ActionBarActivity {
                //pass the rowIdClicked
                 
                Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
+
                        Bundle bundle = new Bundle(); 
                        bundle.putSerializable("taskToPresent",task);
                        intent.putExtras(bundle); 
                        startActivity(intent);
-            	return true;
+                return true;
             }
         });
 	}
@@ -182,8 +183,6 @@ public class MainActivity extends ActionBarActivity {
 		listDataHeader.add("Tomorrow");
 		listDataHeader.add("Later");
 		listDataHeader.add("Missed");
-
-		
 
 		// open Database connection
 		openDB();

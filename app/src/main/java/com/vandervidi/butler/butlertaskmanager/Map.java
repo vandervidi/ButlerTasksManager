@@ -122,9 +122,7 @@ public class Map extends Activity implements OnMapReadyCallback {
             public void onClick(View v) {
 
                 latLngSerial = new LatLngPointSerializable(currSelectedLat, currSelectedLng);
-                Toast.makeText(getApplicationContext(),
-                        "setResult: Lat: "+ latLngSerial.getLat() + "lng: "+ latLngSerial.getLng(), Toast.LENGTH_SHORT)
-                        .show();
+
 
                 if((bundle.getString("requestCode")).equals("REQUEST_LOCATION")){
                           Intent backToAddNewTask= new Intent(Map.this , EditActivity.class);
