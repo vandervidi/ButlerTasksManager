@@ -10,7 +10,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.vandervidi.butler.butlertaskmanager.NotificationActivity;
+import com.vandervidi.butler.butlertaskmanager.MainActivity;
 
 public class NotifyService extends Service{
 
@@ -62,7 +62,7 @@ public class NotifyService extends Service{
 	        Notification notification = new Notification(icon, text, time);
 
 	        // The PendingIntent to launch our activity if the user selects this notification
-	        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, NotificationActivity.class), 0);
+	        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
 
 	        // Set the info for the views that show in the notification panel.
 	        notification.setLatestEventInfo(this, title, text, contentIntent);

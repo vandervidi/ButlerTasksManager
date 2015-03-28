@@ -41,9 +41,9 @@ public class AddNewTask extends ActionBarActivity {
         final TextView twDescription = (TextView) findViewById(R.id.taskDescription);
         final TextView twTitle = (TextView) findViewById(R.id.taskTitle);
         final Button dateView = (Button)findViewById(R.id.chooseDate);
-            final Button timeView = (Button)findViewById(R.id.chooseHour);
-            final Button setLocation = (Button) findViewById(R.id.setLocation);
-            final Button btAddNewTask = (Button) findViewById(R.id.addToDB);
+        final Button timeView = (Button)findViewById(R.id.chooseHour);
+        final Button setLocation = (Button) findViewById(R.id.setLocation);
+        final Button btAddNewTask = (Button) findViewById(R.id.addToDB);
         final Button bt_map = (Button) findViewById(R.id.goToMap);
 
         // Set location button click listener
@@ -88,6 +88,7 @@ public class AddNewTask extends ActionBarActivity {
 
                     Intent intent = new Intent(AddNewTask.this, MainActivity.class);
                     startActivity(intent);
+                    //scheduleClient.unBindService();
                     finish();
                 }
 			}
@@ -99,6 +100,15 @@ public class AddNewTask extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
+    }
+
+    @Override
+    protected void onStop() {
+        // When our activity is stopped ensure we also stop the connection to the service
+        // this stops us leaking our activity into the system *bad*
+        if(scheduleClient != null)
+            scheduleClient.unBindService();
+        super.onStop();
     }
 
     @Override
@@ -173,7 +183,6 @@ public class AddNewTask extends ActionBarActivity {
 		return null;
 	}
 
-	
 
 	public void setHour(View v) {
 		showDialog(0);
